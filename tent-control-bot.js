@@ -234,7 +234,7 @@ function mainLoop() {
     }
     if (stateUtils.isUsersTypingState()) {
         rounds_since_sentence_repeated++;
-        if (rounds_since_sentence_repeated == gameSettings.rounds_repeat_sentance) {
+        if (rounds_since_sentence_repeated >= gameSettings.rounds_repeat_sentance) {
             ChatUtils.sayInChat(client, "Enter \"" + current_round_sentance + "\" in chat to win the round!");
             rounds_since_sentence_repeated = 0;
         }
@@ -242,6 +242,7 @@ function mainLoop() {
         var time_in_round = new DateDiff(new Date(), stateUtils.getLastStateChange());
         if (time_in_round.seconds() >= gameSettings.max_length_seconds_main_round) {
             if (resultTracker.getWinners().length > 0) {
+                rounds_since_sentence_repeated = 0;
                 stateUtils.setStateGiveWinnersLoot();
             }
         }
@@ -340,7 +341,7 @@ function mainLoop() {
         }
 
         rounds_since_sentence_repeated++;
-        if (rounds_since_sentence_repeated == 6) {
+        if (rounds_since_sentence_repeated >= 6) {
             ChatUtils.sayInChat(client, "Enter \"" + current_round_sentance + "\" in chat to win the round!");
             rounds_since_sentence_repeated = 0;
         }
@@ -360,6 +361,7 @@ function mainLoop() {
                 stateUtils.setStateBattle();
                 return player.update(redis_client);
             });
+            rounds_since_sentence_repeated = 0;
         }
     }
     if (stateUtils.isBattleLootAnnounceState()) {
