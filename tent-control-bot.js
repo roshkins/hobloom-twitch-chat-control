@@ -339,6 +339,12 @@ function mainLoop() {
             stateUtils.setStateAnnounceNewRound();
         }
 
+        rounds_since_sentence_repeated++;
+        if (rounds_since_sentence_repeated == 6) {
+            ChatUtils.sayInChat(client, "Enter \"" + current_round_sentance + "\" in chat to win the round!");
+            rounds_since_sentence_repeated = 0;
+        }
+
         var time_in_round = new DateDiff(new Date(), stateUtils.getLastStateChange());
         if (time_in_round.seconds() >= gameSettings.time_between_monster_attacks_seconds) {
             var user = resultTracker.getWinners()[RNGUtils.getRandom(0, resultTracker.getWinners().length - 1)];
