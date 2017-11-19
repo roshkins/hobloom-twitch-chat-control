@@ -1,12 +1,10 @@
 var Monster = require('./Monster');
 var util = require('util');
 
-function Goblin(client, channel, locks, callback) {
+function Goblin(multiplier) {
     Monster.apply(this, arguments);
-    this.locks = locks;
-    this.client = client;
-    this.channel = channel;
     this.name = "Goblin";
+<<<<<<< HEAD
     this.hp = 5;
     this.xp = 10;
     this.min_damage = 1;
@@ -28,6 +26,15 @@ Goblin.prototype.punish = function () {
 Goblin.prototype.finish = function (settings) {
     this.callbackFunction(settings, 'intake', false);
 };
+=======
+    this.max_hp = 3 * multiplier;
+    this.hp = this.max_hp;
+    this.xp = 100;
+    this.min_damage = 1;
+    this.max_damage = 10;
+    this.battle_begin_message = 'A Goblin runs into your village from the goblin infested caves north of your village!';
+}
+>>>>>>> bc6253771e367531ca00b479f59577070a8762f6
 
 util.inherits(Goblin, Monster);
 
