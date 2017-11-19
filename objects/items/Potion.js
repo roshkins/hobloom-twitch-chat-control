@@ -10,7 +10,11 @@ function Potion() {
 }
 
 Potion.prototype.use = function (redis, player) {
+<<<<<<< HEAD
     player.setHP(player.getHP() + 50);
+=======
+    player.heal(50);
+>>>>>>> bc6253771e367531ca00b479f59577070a8762f6
     if (player.getHP() > player.getMaxHP()) {
         player.setHP(player.getMaxHP());
     }
